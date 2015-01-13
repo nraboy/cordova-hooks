@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 
+/*
+ * Lint all JavaScript files in the listed directories for errors.  If errors
+ * are found, stop the build proccess until they are corrected.
+ */
+
 var fs = require("fs");
 var path = require("path");
 var jshint = require("jshint").JSHINT;
 
 var filesWithErrorsCount = 0;
 
+// All directories that contain JavaScript in the www path of your project you want linted
 var foldersToProcess = [
     "js"
 ];
