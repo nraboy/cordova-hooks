@@ -32,7 +32,7 @@ function processFiles(dir, callback) {
         file = dir + "/" + file;
         var fileStat = fs.statSync(file);
         if(!fileStat.isDirectory()) {
-            if(path.extname(file) === ".js") {
+            if(path.extname(file) === ".js" && file.indexOf(".min.js") === -1) {
                 errorCount += lintFile(file);
             }
         }
