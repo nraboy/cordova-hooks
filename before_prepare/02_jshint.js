@@ -9,6 +9,14 @@ var fs = require("fs");
 var path = require("path");
 var jshint = require("jshint").JSHINT;
 
+// jshint config
+var jshintConfig = {};
+// read .jshintrc
+var jshintrc = '.jshintrc';
+if(fs.existsSync(jshintrc)) {
+  jshintConfig = JSON.parse(fs.readFileSync(jshintrc).toString());
+}
+
 var filesWithErrorsCount = 0;
 
 // All directories that contain JavaScript in the www path of your project you want linted
@@ -43,7 +51,7 @@ function processFiles(dir, callback) {
 function lintFile(file) {
     console.log("Linting " + file);
     var fileData = fs.readFileSync(file);
-    if(jshint(fileData.toString())) {
+    if(jshint(fileData.toString(), jshintConfig)) {
         console.log("File " + file + " has no errors.");
         console.log("-----------------------------------------");
         return 0;
