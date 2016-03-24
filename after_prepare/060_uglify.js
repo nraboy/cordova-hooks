@@ -83,6 +83,10 @@ function compress(file) {
             console.log('minifying css file ' + file);
             var source = fs.readFileSync(file, 'utf8');
             var result = cssMinifier.minify(source);
+            // support new clean-css
+            if(result.styles) {
+              result = result.styles;
+            }
             fs.writeFileSync(file, result, 'utf8'); // overwrite the original unminified file
             break;
         default:
